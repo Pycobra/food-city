@@ -1,0 +1,84 @@
+#single-collection,
+#single-collection .single-collection__wrap,
+#single-collection .single-c__item:nth-child(2) .single-c__item-wrap{
+    display: grid;
+}
+#single-collection .single-collection__wrap{
+    display: grid;
+    grid-template-columns: auto;
+}
+
+#single-collection .single-collection__wrap .single-c__item{
+    display: grid;
+    grid-template-columns: auto;
+}
+#single-collection .single-c__item .single-c__item-wrap{
+    gap: 100px;
+}
+#single-collection .single-collection__wrap .single-c__item
+.single-c__item-row .main-img{
+    height: 55vh;
+    width: 100%;
+    object-fit: cover; 
+}
+
+#single-collection .single-collection__wrap .single-c__item
+.single-c__item-row:first-child{
+    display: grid;
+    /* gap: 10px; */
+    background-color: var(--light-gray);
+    /* padding: 10px; */
+    color: var(--normal);
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+#single-collection .single-collection__wrap .single-c__item
+.single-c__item-row:first-child .single-c__main-item{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    padding: 10px;
+}
+#single-collection .single-collection__wrap .single-c__item
+.single-c__item-row:first-child .item{
+    display: grid;
+    align-content: space-between;
+    gap: 10px;
+    background: var(--white);
+    padding: 10px;
+}
+#single-collection .single-collection__wrap .single-c__item
+.single-c__item-row:first-child .item .item-list{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    background: var(--brown6);
+    padding: 5px 10px;
+}
+#single-collection .single-collection__wrap .single-c__item
+.single-c__item-row:first-child span:first-child{
+    font-weight: 800;
+}
+#single-collection .single-collection__wrap .single-c__item
+.single-c__item-row:first-child span:nth-child(2){
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--gray);
+}
+
+
+
+
+#single-collection .single-collection__wrap .single-c__item
+.single-c__item-row:last-child{
+    padding-top: 70px;
+}
+
+
+
+@media screen and (max-width:540px){
+    #single-collection .single-collection__wrap{
+        grid-template-columns: auto;
+    }
+}

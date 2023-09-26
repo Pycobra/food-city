@@ -1,0 +1,59 @@
+#side-content-right,
+#side-content-right .s-content__item,
+#side-content-right .s-content__item .wrap{ 
+    display: grid;
+}
+#side-content-right{
+    grid-template-columns: auto;
+    grid-template-rows: 27vh 15vh 22vh;
+    gap: 30px;
+}
+#side-content-right .s-content__item{
+}
+
+
+
+#side-content-right .s-content__item:first-child{ 
+}
+#side-content-right .s-content__item:first-child .wrap .img{ 
+    background-image: url("../../Media/images/site_images/restaurant-ux.png");
+    background-size: cover;
+    height: 150px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+
+
+#side-content-right .s-content__item:nth-child(2){
+    grid-template-columns: auto auto;
+    gap: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+#side-content-right .s-content__item:nth-child(2) .wrap .img{ 
+    background-image: url("../../Media/images/site_images/restaurant-ux.png");
+    background-size: cover;
+    height: 100%;
+}
+#side-content-right .s-content__item:nth-child(2) .wrap:first-child .img{ 
+    background-image: url("../../Media/images/site_images/food-cover1.png");
+}
+#side-content-right .s-content__item:nth-child(2) .wrap:nth-child(2) .img{ 
+    background-image: url("../../Media/images/site_images/food-cover2.png");
+}
+#side-content-right .s-content__item:nth-child(2) .wrap:nth-child(3) .img{ 
+    background-image: url("../../Media/images/site_images/food-cover3.png");
+}
+#side-content-right .s-content__item:nth-child(2) .wrap:last-child .img{ 
+    background-image: url("../../Media/images/site_images/food-cover4.png");
+}
+
+
+
+#side-content-right .s-content__item:last-child{
+    
+}
+#side-content-right .s-content__item:last-child .wrap{
+    
+}

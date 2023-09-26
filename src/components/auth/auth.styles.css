@@ -1,0 +1,96 @@
+#auth {
+    display: grid;
+}
+#auth .auth-content__wrap{
+    display: grid;
+    grid-template-columns: 40% 40%;
+    justify-content: space-between;
+    padding: 20px;
+    height: 80vh;
+}
+#auth .auth-content__wrap form{
+    align-self: end;
+    padding: 20px;
+}
+
+#auth .auth-content__wrap form .auth-content__row{
+    display: grid;
+    gap: 20px;
+}
+#auth .auth-content__wrap form .auth-content__row .svg-inline--fa{
+    justify-self: center;
+    font-size: 30px;
+    color: var(--brown16);
+}
+#auth .auth-content__wrap form .auth-content__row h1{
+    margin-bottom: 10px;
+    color: var(--normal);
+    font-size: 26px;
+    justify-self: center;
+}
+#auth .auth-content__wrap form .auth-content__row-item{
+    display: grid;
+    /* grid-template-columns: 20% auto; */
+    align-items: baseline;
+    text-align: center;
+    gap: 10px;
+    position: relative;
+}
+#auth .auth-content__wrap form .auth-content__row-item .label{
+    font-weight: bold;
+    color: var(--gray);
+}
+#auth .auth-content__wrap form .auth-content__row-item:last-child{
+    display: grid;
+    grid-template-columns: auto;
+    /* margin-top: 20px; */
+}
+
+
+
+#auth .auth-content__wrap .auth-content__wrap-item:nth-child(2){
+    border-left: 2px solid var(--brown14);
+    padding: 20px;
+}
+#auth .auth-content__wrap .auth-content__wrap-item:nth-child(2)
+.auth-content__row:first-child{
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: var(--brown22);
+    font-size: 13px;
+}
+#auth .auth-content__wrap .auth-content__wrap-item:nth-child(2)
+.auth-content__row:nth-child(2){
+    display: grid;
+    grid-template-columns:  auto 30%;
+    align-items: baseline;
+    font-weight: 900;
+    color: var(--normal);
+    margin-top: 10px;
+}
+#auth .auth-content__wrap .auth-content__wrap-item:nth-child(2)
+.auth-content__row:nth-child(2) a{
+    display: grid;
+    justify-content: center;
+    border-radius: 50px;
+    font-size: 12px;
+    padding: 5px;
+    cursor: pointer;
+    color: var(--green);
+    border: 1px solid var(--gray);
+}
+
+
+@media screen and (max-width:540px){
+    #auth .auth-content__wrap {
+        /* display: grid; */
+        grid-template-columns: auto;
+        justify-content: unset;
+        height: auto;
+    }
+    #auth .auth-content__wrap .auth-content__wrap-item:nth-child(2) {
+        border-left: none;
+    }
+}
+
+

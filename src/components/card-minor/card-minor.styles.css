@@ -1,0 +1,73 @@
+.card-minor{
+  display: grid;
+  grid-template-columns: auto;
+  box-shadow: 3px 3px 3px var(--gray);
+  overflow: hidden;
+  border-radius: 10px;
+  /* width: 120px; */
+  background-color: var(--light-gray);
+}
+.card-minor.product{
+  gap: 15px;
+}
+
+.card-minor .top-block{
+  position: relative;
+}
+.card-minor .top-block img{
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+.card-minor .top-block .price{
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  font-size: 8px;
+  background: var(--brown16);
+  border: 1px solid var(--brown10);
+  border-left: 4px solid var(--brown10);
+  padding: 2px;
+  color: var(--white);
+}
+.card-minor .top-block .cart-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  position: absolute;
+  background-color: var(--light-gray);
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+}
+.card-minor .top-block span .fa-cart-shopping{
+  color: var(--green);
+  font-weight: bold;
+}
+.card-minor .bottom-block{
+  display: grid;
+}
+.card-minor .bottom-block h1{
+  font-size: 12px;
+    padding: 7px;
+    text-align: center;
+}
+
+
+
+
+
+
+@media screen and (max-width:540px){
+}
+
+
+
+
+
+

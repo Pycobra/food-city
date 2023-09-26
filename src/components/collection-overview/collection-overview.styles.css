@@ -1,0 +1,139 @@
+  .collections-overview__box{
+    display: grid;
+  } 
+  .collections-overview__box .advert.img__1 .wrap .img{ 
+    display: block;
+    background-image: url("../../Media/images/site_images/restaurant-ux.png");
+    background-size: cover;
+    height: 150px;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+
+.collections-overview__box .advert.img__2{
+  grid-template-columns: auto auto;
+  gap: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 40px;
+}
+.collections-overview__box .advert{
+  display: none;
+}
+.collections-overview__box .advert.img__2 .wrap .img{ 
+  display: block;
+  background-image: url("../../Media/images/site_images/restaurant-ux.png");
+  background-size: cover;
+  height: 80px;
+}
+.collections-overview__box .advert.img__2 .wrap:first-child .img{ 
+  background-image: url("../../Media/images/site_images/food-cover1.png");
+}
+.collections-overview__box .advert.img__2 .wrap:nth-child(2) .img{ 
+  background-image: url("../../Media/images/site_images/food-cover2.png");
+}
+.collections-overview__box .advert.img__2 .wrap:nth-child(3) .img{ 
+  background-image: url("../../Media/images/site_images/food-cover3.png");
+}
+.collections-overview__box .advert.img__2 .wrap:last-child .img{ 
+  background-image: url("../../Media/images/site_images/food-cover4.png");
+}
+
+
+
+  .collections-overview{
+    display: grid;
+    background: var(--light-gray);
+    border-radius: 15px;
+  }  
+  .collections-overview .collections-wrap{
+    display: grid;
+  }
+  .collections-overview .collections-wrap .content{
+    display: grid;
+    gap: 30px;
+  }
+  .collections-overview .header-title{
+    font-size: 1.2em;
+    margin-bottom: 40px;
+  }
+
+  .collections-overview.col{
+    display: grid;
+    padding: 20px;
+  }
+  .collections-overview.col .collections-wrap .content{
+    display: grid;
+    gap: 30px;
+  }
+  .collections-overview.row {
+    padding: 20px;
+  }
+  .collections-overview.row .collections-wrap{
+    overflow-x: auto;
+  }
+  .collections-overview.row .collections-wrap .content{
+    display: flex;
+    padding: 15px;
+  }
+  .collections-overview.row .card-minor{
+    width: 120px;
+  }
+
+  .collections-overview.row .collections-wrap::-webkit-scrollbar {
+    height: 5px;
+  }
+  .collections-overview.row .collections-wrap::-webkit-scrollbar-track {
+    background: var(--default);
+  }
+  .collections-overview.row .collections-wrap::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: var(--brown19);
+  }
+  .collections-overview.row .collections-wrap::-webkit-scrollbar-thumb:hover {
+    background: var(--brown9);
+  }
+
+
+  
+  .collections-overview.flex {
+    display: grid;
+    overflow-x: auto;
+    background: var(--brown3);
+  }
+  .collections-overview.flex .collections-wrap .content{
+    /* display: flex;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 0 30px 30px 30px;
+  }
+  .collections-overview.flex .header-title{
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    text-align: center;
+    background: var(--button-inset-color);
+    padding: 10px;
+  }
+
+
+  @media screen and (max-width:768px){
+    .collections-overview.flex .collections-wrap .content{
+      grid-template-columns: auto auto auto;
+    }
+  }
+@media screen and (max-width:540px){
+  .collections-overview .header-title{
+    text-align: center;
+  }
+  .collections-overview__box .advert{
+    display: grid;
+  }
+}
+@media screen and (max-width:375px){
+  .collections-overview.flex .collections-wrap .content{
+    grid-template-columns: auto auto;
+  }
+}

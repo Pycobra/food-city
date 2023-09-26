@@ -1,0 +1,18 @@
+.delivery-form{
+    display: grid;
+    gap: 10px;
+    width: 50vh;
+}
+.delivery-form__head{
+    text-align: center;
+    color: green;
+}
+.delivery-form__wrap{
+      display: grid;
+      padding: 10px;
+      gap: 20px;
+  }
+  .delivery-form__wrap-item{
+      display: grid;
+      gap: 15px;
+  }

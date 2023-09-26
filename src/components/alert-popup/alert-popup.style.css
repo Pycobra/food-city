@@ -1,0 +1,24 @@
+.alert-popup{
+  display: grid;
+  grid-template-columns: 30% auto;
+  background: #abd0bef0;
+  padding: 20px;
+  width: 35vw;
+  font-size: 13px;
+  margin-right: 20px;
+  position: absolute;
+  top: -200px;
+  right: 0;
+  border-radius: 2px;
+  z-index: 5;
+  background: linear-gradient(to right, #d9fbeaf0, #9fd3b9);
+  animation: slideDown 4s ease-in-out 1;
+}
+.alert-popup .svg-inline--fa{
+  color: var(--brown16);
+}
+@keyframes slideDown {
+  0% {transform: translateY(0);}
+  70% {transform: translateY(250px);}
+  100%  {transform: translateY(0);}
+}

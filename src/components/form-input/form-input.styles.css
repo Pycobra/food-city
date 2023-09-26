@@ -1,0 +1,72 @@
+.group{
+  display: grid;
+  grid-template-columns: 25% auto;
+  align-items: baseline;
+  gap: 12px;
+}
+.group.shrink {
+  display: grid;
+  grid-template-columns: auto;
+}
+.group .input{
+  display: grid;
+  align-items: baseline;
+}
+
+.group.shrink .input{
+  position: relative;
+}
+.group .form-input {
+  background: none;
+  background-color: white;
+  color: var (--normal);
+  font-size: 14px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  border: 1.5px solid #d9d9d9;
+  border-radius: 4px;
+}
+
+.group .form-input:focus {
+  outline: 1px solid var(--green);
+  box-shadow: 1px 1px 1px 1px var(--green);
+}
+
+/* .group .form-input:focus ~ .form-input-label {
+  top: -7px;
+  font-size: 14px;
+  background: var(--white);
+} */
+.group .form-input-label, .group .form-input-label label{
+  display: grid;
+  text-align: left;
+}
+.group .form-input-label {
+  font-size: 13px;
+  color: var(--normal);
+  font-weight: 700;
+}
+
+.group.shrink .form-input-label {
+  color: var(--gray);
+  position: absolute;
+  font-weight: normal;
+  pointer-events: none;
+  left: 15px;
+  top: 10px;
+  transition: 300ms ease all;
+}
+
+.group.shrink .form-input-label.shrink2 {
+  top: -7px;
+  left: 5px;
+  /* font-size: 14px; */
+  background: var(--white);
+}
+
+.group .err-msg{
+  color: var(--red);
+  justify-self: start;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
