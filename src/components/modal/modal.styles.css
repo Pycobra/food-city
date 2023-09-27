@@ -19,6 +19,7 @@
     border-radius:5px;
     overflow-y: none;
     position:relative;
+    width: 30vw;
   }
   
   .modal .modal-content .modal-content__item-head{
@@ -35,7 +36,17 @@
       gap: 10px;
   }
   
-  @media screen and (max-width:768px){
+  @media screen and (max-width:540px){  
+    .modal-content {
+        display:flex;
+        background-color: #fefefe;
+        margin-bottom: 5%;
+        border: 1px solid #888;
+        border-radius:5px;
+        overflow-y: none;
+        position:relative;
+        width: 50vw;
+      }
   }
   
   
