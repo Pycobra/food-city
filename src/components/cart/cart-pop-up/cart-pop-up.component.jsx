@@ -76,7 +76,8 @@ const CartPopUp = ({currentCartLoad, addItemStart}) => {
                             <textarea placeholder="special instruction"></textarea>
                             <span className="btn-box">
                                 <CustomButton buttonType="Button" onClick={e => HandleCart(e)}>
-                                    <FontAwesomeIcon icon={faCartShopping} />
+                                {/* <FontAwesomeIcon icon={faCartShopping} /> */}
+                                    <span>Place Order</span>
                                 </CustomButton>
                             </span>
                         </span>
