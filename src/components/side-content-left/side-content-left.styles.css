@@ -71,7 +71,7 @@
     display: flex;
     justify-content: center;
     padding: 5px;
-    font-size: 13px;
+    font-size: 12px;
 }
 #side-content-left .s-content__item:nth-child(2) 
 .s-content__item-row{
