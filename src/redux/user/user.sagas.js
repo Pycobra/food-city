@@ -29,7 +29,11 @@ class CustomError extends Error{
 export function* SignUp({payload: {email, user_name, password, password2}}) {
     try{
         const response = yield ApiPost_create_account({email, user_name, password, password2})
-        if (response.status === 201){
+        const start = 200
+        const end = 299
+        const list = Array.from({length: end - start + 1}, (_, index) => start + index)
+        // if (response.status === 201){
+        if (list.includes(response.status)){
             yield put(signUpSuccess(response))
             yield put(AlertMessage({
                 type: 'success', 
