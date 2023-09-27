@@ -12,7 +12,7 @@
     background-color: rgba(0,0,0,0.4); 
   }
 .modal-content {
-    display:flex;
+    display:grid;
     background-color: #fefefe;
     margin-bottom: 5%;
     border: 1px solid #888;
