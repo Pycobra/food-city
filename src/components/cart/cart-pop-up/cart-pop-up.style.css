@@ -25,7 +25,6 @@ ul li{
 .current-cart__card .current-cart__card-wrap .current-cart__card-col
 .c-c__card-col_item.first{
     display: grid;
-    width: 25vw;
     border: 1px solid var(--pale-gray);
     border-radius: 3px;
     padding: 5px;
@@ -60,7 +59,7 @@ ul li{
 }
 .current-cart__card .current-cart__card-wrap .current-cart__card-col
 .c-c__card-col_item:last-child textarea{
-    width: 25vw;
+    width: 100%;
     height: 17vh;
     font-size: 14px;
     outline: none;
