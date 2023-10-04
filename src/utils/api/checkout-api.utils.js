@@ -32,3 +32,9 @@ export async function ApiGet_paystack_public_key(){
                 .catch(err => err)
     return data
 }
+export async function ApiGet_flutterwave_public_key(){
+    const data = await apiInstance.get(`checkout/flutterwave-public-key`)
+                .then(res => res.data)
+                .catch(err => err)
+    return data
+}

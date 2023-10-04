@@ -12,30 +12,42 @@ import { selectCurrentUser } from "../../redux/user/user.selector";
 import { ApiPost_complete_payment } from "../../utils/api/checkout-api.utils";
 import { 
     fetchDeliveryOptionStart, fetchVerifyPaymentStart, 
-    fetchPaystackPublicKeyStart, fetchPaymentSelectionStart 
+    fetchPaystackPublicKeyStart, fetchPaymentSelectionStart, fetchFlutterwavePublicKeyStart 
 } from "../../redux/checkout/checkout.action";
-import { selectPaystackPublicKey, selectPaymentSelection, selectDeliveryOptions } from "../../redux/checkout/checkout.selector";
+import { 
+    selectPaystackPublicKey, selectFlutterwavePublicKey, 
+    selectPaymentSelection, selectDeliveryOptions 
+} from "../../redux/checkout/checkout.selector";
 import { usePaystackPayment, PaystackButton } from "react-paystack";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+// import { PAYSTACK_PUBLIC_KEY, FLUTTERWAVE_PUBLIC_KEY } from "./constant";
 
 
 
 
 
 
-const Checkout = ({cartItems, total_price, itemCount, totalAmount, getPaystackPublicKeyStart, paymentSelection, 
-    verifyPaymentStart, paystackPublicKey, currentUser, delivery_options}) => {
+const Checkout = ({cartItems, total_price, itemCount, totalAmount, 
+    getPaystackPublicKeyStart, paymentSelection, verifyPaymentStart, 
+    paystackPublicKey, currentUser, delivery_options,
+    flutterwavePublicKey}) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [config, setConfig] = useState({})
-    const [callbackInfo, setCallbackInfo] = useState({id: "", name: "", amount: 0})
+    const [callbackInfo, setCallbackInfo] = useState({})
     
-    const initializePayment = usePaystackPayment(config);
+    const initializePaystackPayment = usePaystackPayment(config);
+    const initializeFlutterPayment = useFlutterwave(config);
     const onSuccess = (response) => {
-        const s = totalAmount + defaultDelivery.delivery_price
-        console.log(s, 'callbackInfo.amount')
-        if (response && callbackInfo.id && callbackInfo.name && callbackInfo.amount !== 0){
+        console.log(response, 'callbackInfo is amount callbackInfo is amount')
+        if (response && callbackInfo.id && callbackInfo.payment_name 
+            && callbackInfo.amount !== 0){
             dispatch(fetchVerifyPaymentStart({
-                ref: response.reference, 
+                ref: callbackInfo.payment_name === "paystack-payment"
+                    ? response.reference
+                    : callbackInfo.payment_name === "flutterwave-payment"
+                    ? response.tx_ref
+                    : null,
                 cartItems, 
                 user: currentUser.user_id, 
                 total_quantity: itemCount, 
@@ -44,12 +56,12 @@ const Checkout = ({cartItems, total_price, itemCount, totalAmount, getPaystackPu
                 total_paid: totalAmount + defaultDelivery.delivery_price, 
                 amount: totalAmount + defaultDelivery.delivery_price, 
                 payment_option: callbackInfo.id, //paymentDetail.id,
-                payment_name: callbackInfo.name//paymentDetail.name
+                payment_name: callbackInfo.payment_name//paymentDetail.name
             }))
         }
     }
     const onClose = () => {
-        alert('Transaction was not completed, window closed.');
+        alert('Transaction was not completed, payment was canceled.');
     }
     
     const HandlePayment = e => {
@@ -63,26 +75,45 @@ const Checkout = ({cartItems, total_price, itemCount, totalAmount, getPaystackPu
             navigate('/checkout/delivery-and-address')
             alert("You have not chosen a delivery method or address")
         } 
-        else if (currentUser && paystackPublicKey && defaultDelivery && cartItems){
-            var amount = totalAmount * 100
+        else if (currentUser && defaultDelivery && cartItems){
+            var amount = totalAmount
             if (defaultDelivery) {
-                var amount = (totalAmount + defaultDelivery.delivery_price)  * 100
+                var amount = (totalAmount + defaultDelivery.delivery_price)
             }
-            const obj = {
-                publicKey: paystackPublicKey,
-                email: currentUser.email,
-                amount: amount,
-                currency: 'NGN',
-                reference: '' + Math.floor((Math.random() * 1000000000) + 1),
-                metadata: { 
-                    name: currentUser.user_name, 
-                    phone: currentUser.phone 
-                },
+            var obj ={}
+            if (e.currentTarget.dataset.name === "paystack-payment"
+                && paystackPublicKey){
+                var obj = {
+                    publicKey: paystackPublicKey,
+                    email: currentUser.email,
+                    amount: amount * 100,
+                    currency: 'NGN',
+                    reference: '' + Math.floor((Math.random() * 1000000000) + 1),
+                    metadata: { 
+                        name: currentUser.user_name, 
+                        phone: currentUser.phone 
+                    },
+                }
+            }
+            else if (e.currentTarget.dataset.name === "flutterwave-payment"
+                && flutterwavePublicKey){
+                var obj = {
+                    public_key: flutterwavePublicKey,
+                    amount,
+                    currency: 'NGN',
+                    tx_ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+                    payment_options: "card,mobilemoney,ussd",
+                    customer: { 
+                        email: currentUser.email,
+                        name: currentUser.user_name, 
+                        phone: currentUser.phone 
+                    },
+                }
             }
             setCallbackInfo({
                 id: e.currentTarget.id, 
-                name: e.currentTarget.dataset.name,
-                amount
+                amount,
+                payment_name: e.currentTarget.dataset.name
             })
             setConfig(obj)
         }
@@ -100,15 +131,25 @@ const Checkout = ({cartItems, total_price, itemCount, totalAmount, getPaystackPu
         Container.classList.remove('addLeftPadding')
         Container.classList.remove('addRightPadding')
     }, [delivery_options])
-    useEffect(() => {
-        initializePayment(onSuccess, onClose)
-    }, [config])
     
-
+    useEffect(() => {
+        if (Object.keys(config).length && Object.keys(callbackInfo).length){
+            if (callbackInfo.payment_name==="paystack-payment") 
+                initializePaystackPayment(onSuccess, onClose)
+            else if (callbackInfo.payment_name==="flutterwave-payment"){
+                initializeFlutterPayment({
+                    callback: (response) => onSuccess(response),
+                    onclose
+                })
+            }
+        }
+    }, [config, callbackInfo])
+    
     useEffect(() => {
         dispatch(fetchPaymentSelectionStart())
         dispatch(fetchDeliveryOptionStart())
         dispatch(fetchPaystackPublicKeyStart())
+        dispatch(fetchFlutterwavePublicKeyStart())
 
         const delivery_id = localStorage.getItem('delivery')
         const default_delivery = delivery_options 
@@ -209,6 +250,7 @@ const mapStateToProps = createStructuredSelector({
     paystackPublicKey: selectPaystackPublicKey,
     paymentSelection: selectPaymentSelection,
     delivery_options: selectDeliveryOptions,
+    flutterwavePublicKey: selectFlutterwavePublicKey
 })
 const mapDispatchToProps = dispatch => ({
     verifyPaymentStart: (obj) => dispatch(fetchVerifyPaymentStart(obj)),

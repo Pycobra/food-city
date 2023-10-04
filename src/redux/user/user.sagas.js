@@ -9,9 +9,12 @@ import {
 import {  
     signOutFailure, signOutSuccess,
     signUpFailure, signUpSuccess,
-    AlertMessage, addressSubmitFailure,
+    AlertMessage, addressSubmitSuccess, 
+    addressSubmitFailure,
     emailSignInFailure, emailSignInSuccess,
-    fetchCurrentUserAddressSuccess, fetchCurrentUserAddressFailure
+    fetchCurrentUserAddressStart,
+    fetchCurrentUserAddressSuccess, 
+    fetchCurrentUserAddressFailure
 } from "./user.action"
 import decode from 'jwt-decode'
 
@@ -92,7 +95,8 @@ export function* postAddress({payload}) {
     try{
         const response = yield ApiPost_address(payload);
         if (response.status= 201){
-            yield put(AlertMessage({
+            yield put(fetchCurrentUserAddressStart(payload.customer))
+            yield put(addressSubmitSuccess({
                 type: 'success', 
                 content: 'address successfully loged in Added'
             }))

@@ -46,6 +46,17 @@ export const fetchPaystackPublicKeyFailure = errorMessage => ({
     type: CheckoutActionTypes.FETCH_PAYSTACK_PUBLIC_KEY_FAILURE,
     payload: errorMessage
 })
+export const fetchFlutterwavePublicKeyStart = () => ({
+    type: CheckoutActionTypes.FETCH_FLUTTERWAVE_PUBLIC_KEY_START
+})
+export const fetchFlutterwavePublicKeySuccess = Obj => ({
+    type: CheckoutActionTypes.FETCH_FLUTTERWAVE_PUBLIC_KEY_SUCCESS,
+    payload: Obj
+})
+export const fetchFlutterwavePublicKeyFailure = errorMessage => ({
+    type: CheckoutActionTypes.FETCH_FLUTTERWAVE_PUBLIC_KEY_FAILURE,
+    payload: errorMessage
+})
 export const fetchAlertMessage = Obj => ({
     type: CheckoutActionTypes.FETCH_ALERT_MESSAGE,
     payload: Obj

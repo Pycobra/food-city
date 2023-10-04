@@ -3,7 +3,7 @@ import { API_BASE_URL } from './constant';
 
 const apiInstance = axios.create({
     baseURL: API_BASE_URL,
-    timeout: 5000, // timeout after 5 seconds
+    timeout: 10000, // timeout after 5 seconds
     headers: {
         Authorization: localStorage.getItem('access_token')
             ? 'JWT ' + localStorage.getItem('access_token')
@@ -12,15 +12,21 @@ const apiInstance = axios.create({
         accept: 'application/json',
     },
 });
-
+apiInstance.interceptors.request.use((config) => {
+        return config;
+    },
+    async function(error){
+        return  Promise.reject(error);
+    }
+)
 apiInstance.interceptors.response.use((response) => {
         return response;
     },
     async function(error){
-        // console.log(error, "weeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrd")
         const originalRequest = error.config;
         if (typeof error.response === 'undefined') {
-            alert('Api server is down');
+            // alert('Api server is down');
+            console.log(error.response)
             return  Promise.reject(error);
         }
         if (error.response.status === 401 &&

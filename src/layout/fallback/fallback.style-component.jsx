@@ -21,4 +21,7 @@ export const FallbackImageContainer = styled.div`
 export const FallbackImageText = styled.h2`
   font-size: 28px;
   color: #2f8e89;
+  @media screen and (max-width:375px){
+    font-size: 18px;
+  }
 `;

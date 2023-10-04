@@ -7,20 +7,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp, faInfo, faPlus } from "@fortawesome/free-solid-svg-icons";
 import CardDeliveryAddress from "./card.components";
 import Modal from "../modal/modal.components";
-import DeliveryForm from "./form.component";
+import DeliveryForm from "./address-form.component";
 import PrivateRoute from "../../layout/PrivateRoute";
 import { selectCurrentUser, selectCurrentUserAddress } from "../../redux/user/user.selector";
 import { fetchDeliveryOptionStart, fetchPaymentSelectionStart } from "../../redux/checkout/checkout.action";
 import { 
-    selectDeliveryOptions, selectPaymentSelection, selectAlertMessage, selectIsFetching
+    selectDeliveryOptions, selectPaymentSelection, 
+    selectAlertMessage, selectIsFetching
 } from "../../redux/checkout/checkout.selector";
+import { selectIsFetching as selectIsFetchingUser } from "../../redux/user/user.selector";
 import { fetchCurrentUserAddressStart } from "../../redux/user/user.action";
 
 
 
 
 var cnt = 0
-const DeliveryAddress = ({currentUser, currentUserAddressStart, delivery_options, payment_selection, current_user_address}) => {
+const DeliveryAddress = ({currentUser, currentUserAddressStart, 
+    isFetching, delivery_options, payment_selection, 
+    current_user_address, isFetchingUser}) => {
 
     const [defaultAddress, setDefaultAddress] = useState(null)
     const [defaultDelivery, setDefaultDelivery] = useState(null)
@@ -64,19 +68,32 @@ const DeliveryAddress = ({currentUser, currentUserAddressStart, delivery_options
         const address_id = localStorage.getItem('address')
         const all_address = current_user_address 
                             ? current_user_address.filter((itm, ind) => {
-                                if (parseInt(itm.id) === parseInt(address_id)) setDefaultAddress(itm) 
-                                return parseInt(itm.id) !== parseInt(address_id)
+                                console.log(itm.id, address_id, "pop===pop")
+                                if (itm.id === address_id) setDefaultAddress(itm) 
+                                return itm.id !== address_id
                             }) : null
         setAllAddress(all_address)
+        if (!isFetchingUser && clickedBtn) 
+            setModalDisplay(false)
     }, [delivery_options, current_user_address,
-    defaultAddressID, defaultDeliveryID])
+        defaultAddressID, defaultDeliveryID, 
+        isFetchingUser])
         
     const [modalDisplay, setModalDisplay] = useState(false)
+    const [clickedBtn, setClickedBtn] = useState(false)
     const HandleModal = (e, str) => {
         if (e.target.className==="modal" || str==="display"){
             setModalDisplay(!modalDisplay)
         }
+        if (e.target.classList.contains("custom-button")){
+            setClickedBtn(true)
+        }
     }
+    // useEffect(() => {
+    //     if (!isFetchingUser && clickedBtn) 
+    //         setModalDisplay(false)
+    // }, [isFetchingUser])
+    
     const HideCards = (e) => {
         const {className} = e.currentTarget
         if (className==="toggle-delivery"){
@@ -97,7 +114,7 @@ const DeliveryAddress = ({currentUser, currentUserAddressStart, delivery_options
             {
                 modalDisplay
                 ? <PrivateRoute>
-                    <Modal HandleModal={HandleModal}> <DeliveryForm /> </Modal>
+                    <Modal HandleModal={HandleModal}> <DeliveryForm HandleModal={HandleModal}/> </Modal>
                   </PrivateRoute>
                 : null
             }
@@ -201,6 +218,7 @@ const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
     alertMessage: selectAlertMessage,
     isFetching: selectIsFetching,
+    isFetchingUser: selectIsFetchingUser,
     delivery_options: selectDeliveryOptions,
     payment_selection: selectPaymentSelection,
     current_user_address: selectCurrentUserAddress,

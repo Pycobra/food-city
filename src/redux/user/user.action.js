@@ -20,6 +20,10 @@ export const addressSubmitStart = data => ({
     type: UserActionTypes.ADDRESS_SUBMIT_START,
     payload: data
 })
+export const addressSubmitSuccess = data => ({
+    type: UserActionTypes.ADDRESS_SUBMIT_SUCCESS,
+    payload: data
+})
 export const addressSubmitFailure = errorMessage => ({
     type: UserActionTypes.ADDRESS_SUBMIT_FAILURE,
     payload: errorMessage

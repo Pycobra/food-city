@@ -40,6 +40,10 @@ export const selectClickedCart = createSelector(
     [selectCart],
     (cart) => cart.clicked_cart
 )
+export const selectIsFetching = createSelector(
+    [selectCart],
+    (cart) => cart.isFetching
+)
 
 export const selectCartTotalPrice = createSelector(
     [selectCartItems],

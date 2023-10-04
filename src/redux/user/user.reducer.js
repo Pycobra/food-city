@@ -44,6 +44,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
                             : action.payload,
             }
         case UserActionTypes.ADDRESS_SUBMIT_START:
+            return{
+                ...state,
+                isFetching: true,
+                errorMessage: null,
+                alertMessage: null,
+            }
         case UserActionTypes.FETCH_ADDRESS_START:
             return{
                 ...state,
@@ -51,6 +57,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 curren_user_address: null,
                 errorMessage: null,
                 alertMessage: null,
+            }
+        case UserActionTypes.ADDRESS_SUBMIT_SUCCESS:
+            return{
+                ...state,
+                isFetching: false,
+                curren_user_address: null,
+                errorMessage: null,
+                alertMessage: action.payload,
             }
         case UserActionTypes.ALERT_MESSAGE:
             return{

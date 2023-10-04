@@ -3,7 +3,7 @@ import { addItemToCart, subtractItemQuantity } from "./cart.utils"
 
 const INITIAL_STATE = {
     hidden: true,
-    isFetching: true,
+    isFetching: false,
     cartItemz: [],
     clicked_cart: null,
     errorMessage: undefined,
@@ -41,7 +41,8 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         case CartActionTypes.ADD_ITEMS_TO_CART_FAILURE:
             return{
                 ...state,
-                errorMessage: action.payload
+                errorMessage: action.payload,
+                isFetching: false,
             }
         case CartActionTypes.CLICKED_CART:
             return{

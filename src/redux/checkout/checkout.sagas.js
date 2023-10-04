@@ -5,13 +5,15 @@ import {
     ApiGet_payment_slections,
     ApiPost_complete_payment,
     ApiGet_paystack_public_key,
+    ApiGet_flutterwave_public_key,
 } from "../../utils/api/checkout-api.utils"
 import { 
     fetchDeliveryOptionSuccess, fetchDeliveryOptionFailure,
     fetchPaymentSelectionSuccess, fetchPaymentSelectionFailure,
     fetchAlertMessage, fetchVerifyPaymentFailure,
     fetchVerifyPaymentSuccess, fetchPaystackPublicKeySuccess,
-    fetchPaystackPublicKeyFailure
+    fetchPaystackPublicKeyFailure, fetchFlutterwavePublicKeySuccess,
+    fetchFlutterwavePublicKeyFailure
 } from "./checkout.action"
 
 
@@ -81,6 +83,19 @@ export function* getPaystackPublicKey() {
         yield put(fetchPaystackPublicKeyFailure(error.message))
     }
 }
+export function* getFlutterwavePublicKey() {
+    try{
+        const response = yield ApiGet_flutterwave_public_key()
+        if (response.message !== "Network Error"){
+            yield put(fetchFlutterwavePublicKeySuccess(response))
+        } else {
+            throw new CustomError(response.message)
+        }
+    } 
+    catch (error){
+        yield put(fetchFlutterwavePublicKeyFailure(error.message))
+    }
+}
 export function* onFetchDeliveryOptionsStart() {
     yield takeLatest(CheckoutActionTypes.FETCH_DELIVERY_OPTION_START, 
         getDeliveryOptions)
@@ -97,12 +112,17 @@ export function* onPayStackPublicKeyStart() {
     yield takeLatest(CheckoutActionTypes.FETCH_PAYSTACK_PUBLIC_KEY_START, 
         getPaystackPublicKey)
 }
+export function* onFlutterwavePublicKeyStart() {
+    yield takeLatest(CheckoutActionTypes.FETCH_FLUTTERWAVE_PUBLIC_KEY_START, 
+        getFlutterwavePublicKey)
+}
 export function* CheckoutSagas() {
     yield all([
         call(onFetchDeliveryOptionsStart), 
         call(onPaymentSelectionStart), 
         call(onVerifyPaymentStart), 
         call(onPayStackPublicKeyStart), 
+        call(onFlutterwavePublicKeyStart), 
         
     ])
 }

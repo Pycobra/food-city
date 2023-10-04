@@ -25,4 +25,7 @@ export const selectPaystackPublicKey = createSelector(
     [selectCheckout],
     (checkout) => checkout.paystack_public_key
 )
-
+export const selectFlutterwavePublicKey = createSelector(
+    [selectCheckout],
+    (checkout) => checkout.flutterwave_public_key
+)

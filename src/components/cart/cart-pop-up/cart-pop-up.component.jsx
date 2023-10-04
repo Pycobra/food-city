@@ -6,7 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { addItemStart } from "../../../redux/cart/cart.action";
 
-const CartPopUp = ({currentCartLoad, addItemStart}) => { 
+
+
+const CartPopUp = ({currentCartLoad, addItemStart, HandleModal}) => { 
     const {ingredient} = currentCartLoad
     const items = ingredient.split(',').map((i, ind) => ({name: i, active: false, id: ind}))
     const [ingList, setIngList] = useState(items)
@@ -38,7 +40,9 @@ const CartPopUp = ({currentCartLoad, addItemStart}) => {
             ...currentCartLoad, ingredient: ing.join(","), 
             special_instuction: instruction
         })
+
     }
+
     return (
             <div className="current-cart__card">
                 <div className="current-cart__card-wrap">
@@ -75,7 +79,10 @@ const CartPopUp = ({currentCartLoad, addItemStart}) => {
                         <span className="c-c__card-col_item">
                             <textarea placeholder="special instruction"></textarea>
                             <span className="btn-box">
-                                <CustomButton buttonType="Button" onClick={e => HandleCart(e)}>
+                                <CustomButton buttonType="Button" onClick={e => {
+                                    HandleCart(e)
+                                    HandleModal(e)
+                                }}>
                                 {/* <FontAwesomeIcon icon={faCartShopping} /> */}
                                     <span>Place Order</span>
                                 </CustomButton>

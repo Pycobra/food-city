@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { createStructuredSelector} from "reselect"; 
 import { connect } from 'react-redux';
 import FormInput from "../form-input/form-input.component";
-import "./form.style.css";
+import "./address-form.style.css";
 import CustomButton from "../custom-button/custom-button.component";
 import { useDispatch } from "react-redux";
 import { addressSubmitStart } from "../../redux/user/user.action";
-import { selectCurrentUser,selectIsFetching } from "../../redux/user/user.selector";
+import { selectCurrentUser,selectIsFetching, selectAlertMsg } from "../../redux/user/user.selector";
 import HoverSpinner from "../hover-spinner/hover-spinner.component";
+import { useEffect } from "react";
 
 
 
@@ -15,7 +16,7 @@ import HoverSpinner from "../hover-spinner/hover-spinner.component";
 
 
 
-const DeliveryForm = ({currentUser, isFetching}) => {
+const DeliveryForm = ({currentUser, alertMsg, isFetching, HandleModal}) => {
     const [addressCredential, setAddressCredential] = useState(
         {full_name: '', email: '', postal_code: '', phone: '', address_line: '', city: ''}
     )
@@ -37,9 +38,9 @@ const DeliveryForm = ({currentUser, isFetching}) => {
     
     const handleSubmit = async (e) => {
         e.preventDefault()
-        dispatch(addressSubmitStart({...addressCredential, customer: currentUser.user_id}))
+        dispatch(addressSubmitStart({...addressCredential, customer: currentUser.user_id})) 
     }
-
+    
     return(
         <div className="delivery-form">
             <div className="delivery-form__wrap">
@@ -137,6 +138,7 @@ const DeliveryForm = ({currentUser, isFetching}) => {
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
     isFetching: selectIsFetching,
+    alertMsg:selectAlertMsg,
 })
 export default connect(mapStateToProps)(DeliveryForm);
 
