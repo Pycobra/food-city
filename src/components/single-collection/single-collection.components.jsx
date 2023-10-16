@@ -39,7 +39,7 @@ const SingleCollection = ({ HandleModal }) => {
                     <div className="single-c__item">
                         <div className="single-c__item-wrap">
                             <div className="single-c__item-row">
-                                <img className="main-img" alt={item ? item.title : null} src={item ? item.images : null}/>
+                                <img className="main-img" alt={item ? item.title : null} src={item ? item.images : null} loading="lazy"/>
                                 <div className="single-c__main-item">
                                     <div className="item">
                                         <div className="price item-list">

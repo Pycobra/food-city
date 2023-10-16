@@ -36,7 +36,7 @@ const VendorCollection = ({ alert, HandleModal }) => {
                     <div id="vendor-c__item-wrap__main" className="vendor-c__item-wrap__col">
                         <div className="img">
                             <h1>{vendor ? vendor.store_name : null} Restaurant</h1>
-                            <img alt={vendor ? vendor.store_name : ''} src={require(`../../Media/images/site_images/google-map1.png`)}/>
+                            <img alt={vendor ? vendor.store_name : ''} src={require(`../../Media/images/site_images/google-map1.png`)} loading="lazy"/>
                             <h2>{vendor ? vendor.location : null}</h2>
                         </div> 
                         {

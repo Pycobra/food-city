@@ -19,7 +19,7 @@ const SideContentLeft = ({sideList}) => {
             <div className="s-content__item">
                     <div className='wrap'>
                         <div className="s-content__item-row">
-                            <img alt="" src={require("../../Media/images/site_images/chef.jpg")}/>
+                            <img alt="img-place" src={require("../../Media/images/site_images/chef.jpg")} loading="lazy"/>
                         </div>
                     </div>
             </div>

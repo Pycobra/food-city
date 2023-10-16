@@ -42,7 +42,7 @@ class Homepage extends React.Component {
                         <MainContent />
                     </div>
                     <div className="fixed-img">
-                        <img alt='chef-image' src={require("../../../Media/images/site_images/chef.jpg")}/>
+                        <img alt='chef-image' src={require("../../../Media/images/site_images/chef.jpg")} loading="lazy"/>
                     </div>
                 </div>
             </div>

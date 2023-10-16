@@ -13,7 +13,7 @@ const CheckoutItem = ({items, clearItem, add_item_start, subtract_item_quantity}
             <div className="container">
                 <div className="checkout-item__wrap">
                     <ul>
-                        <li><img src={images}/></li>
+                        <li><img src={images} alt="img-place" loading="lazy"/></li>
                         <li>${price}</li>
                         <li onClick={e => subtract_item_quantity(items)}><FontAwesomeIcon icon={faMinusCircle} /></li>
                         <li>{quantity}</li>

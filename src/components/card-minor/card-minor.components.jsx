@@ -29,7 +29,7 @@ const CardMinor = ({item, vendor, category, addItemStart, HandleModal, onCartIte
             <div className={`card-minor ${!item.store_name ? 'product' : ''}`} onClick={e => handleClick(e)}>
                 
                 <div className="top-block">
-                    <img src={image}/>
+                    <img src={image} alt="img-place" loading="lazy"/>
                     {
                         !item.store_name
                         ? <span className="price">$ {item.price}</span>

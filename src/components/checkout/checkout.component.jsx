@@ -218,13 +218,13 @@ const Checkout = ({cartItems, total_price, itemCount, totalAmount,
                                     ? <div key={`${i.id}${i.name}`} id={i.id} data-name="paystack-payment" 
                                         className="checkout-t__row-item paystack" 
                                         onClick={e => HandlePayment(e)}>
-                                        <img src={require("../../Media/images/paystack/paystack.png")}/>
+                                        <img alt="img-place" src={require("../../Media/images/paystack/paystack.png")} loading="lazy"/>
                                     </div>
                                     : i.name==="FlutterWave"
                                     ? <div key={`${i.id}${i.name}`} id={i.id} data-name="flutterwave-payment" 
                                         className="checkout-t__row-item flutterwave" 
                                         onClick={e => HandlePayment(e)}>
-                                        <img src={require("../../Media/images/flutterwave/flutterwave.png")}/>
+                                        <img alt="img-place" src={require("../../Media/images/flutterwave/flutterwave.png")} loading="lazy"/>
                                     </div>
                                     : null)
                                 )

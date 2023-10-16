@@ -38,7 +38,7 @@ const ImageSlide = ({side}) => {
                 {
                     images.map((img,idx) => 
                         <div key={idx} className="slide">
-                            <img src={require(`../../Media/images/site_images/${img}.png`)}/>
+                            <img src={require(`../../Media/images/site_images/${img}.png`)} alt="image-place" loading="lazy"/>
                         </div>
                     )
                 }

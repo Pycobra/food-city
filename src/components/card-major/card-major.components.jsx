@@ -34,7 +34,7 @@ const CardMajor = ({item}) => {
             <div className="block block1">
                 <div className="content">
                     <div className="block-top">
-                        <img src={item.vendor_image}/>
+                        <img src={item.vendor_image} alt="vendor-img" loading="lazy"/>
                         <p>{item.store_name}</p>
                     </div> 
                     <div className="block-bottom">
@@ -42,7 +42,7 @@ const CardMajor = ({item}) => {
                             item.meals.map(({images, id}, idx) => 
                                 <div className={`${idx===0 ? 'active' : ''}`} key={idx}>
                                     <span><FontAwesomeIcon icon={faCaretDown}/></span>
-                                    <img data-index={id} className='card-major-image' src={images}/>
+                                    <img data-index={id} className='card-major-image' src={images} alt="img-place" loading="lazy"/>
                                 </div>
                             )
                         }
@@ -54,7 +54,7 @@ const CardMajor = ({item}) => {
                     <div className="block-top">
                         <span className="amount">{currentItem.price}</span>
                         <span className="img">
-                                <img src={currentItem.images}/>
+                                <img src={currentItem.images} alt="item-img" loading="lazy"/>
                         </span>
                     </div>
                     <div className="block-bottom">
